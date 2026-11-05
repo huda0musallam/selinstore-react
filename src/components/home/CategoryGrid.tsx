@@ -1,12 +1,17 @@
-import { useCatalog } from '../../context/catalogContext'
-import { categories } from '../../data/categories'
-import { pluralize } from '../../utils/format'
-import { CategoryLink } from '../ui/CategoryLink'
-import { SectionHeading } from '../ui/SectionHeading'
+import { categories } from '../../data/categories';
+import type { Product } from '../../products/products.types';
+import type { CategoryFilter } from '../../types/catalog';
+import { pluralize } from '../../utils/pluralize';
+import { CategoryLink } from '../ui/CategoryLink';
+import { SectionHeading } from '../ui/SectionHeading';
 
-export function CategoryGrid() {
-  const { products } = useCatalog()
+interface CategoryGridProps {
+  /** null until the products have loaded, so no misleading "0 products" is shown. */
+  products: Product[] | null;
+  onSelectCategory: (category: CategoryFilter) => void;
+}
 
+export function CategoryGrid({ products, onSelectCategory }: CategoryGridProps) {
   return (
     <section className="categories-section" aria-labelledby="categories-heading">
       <div className="container">
@@ -16,27 +21,30 @@ export function CategoryGrid() {
           lead="From the very first outfit to bedtime stories — find just what you need."
         />
         <div className="category-grid">
-          {categories.map((category, index) => (
+          {categories.map((category, position) => (
             <CategoryLink
               key={category.id}
               category={category.id}
-              className={`category-card${index === 0 ? ' category-card--large' : ''}`}
+              onSelect={onSelectCategory}
+              className={`category-card${position === 0 ? ' category-card--large' : ''}`}
             >
               <img src={category.image} alt={category.imageAlt} />
               <span>
                 <b>{category.icon}</b>
                 <strong>{category.name}</strong>
-                <small>
-                  {pluralize(
-                    products.filter((product) => product.categoryId === category.id).length,
-                    'product',
-                  )}
-                </small>
+                {products !== null && (
+                  <small>
+                    {pluralize(
+                      products.filter((product) => product.categoryId === category.id).length,
+                      'product',
+                    )}
+                  </small>
+                )}
               </span>
             </CategoryLink>
           ))}
         </div>
       </div>
     </section>
-  )
+  );
 }

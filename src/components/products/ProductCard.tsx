@@ -1,14 +1,14 @@
-import { getCategoryName } from '../../data/categories'
-import type { Product } from '../../types/product'
-import { formatPrice } from '../../utils/format'
-import { BagIcon, HeartIcon } from '../ui/Icons'
-import { ProductImage } from './ProductImage'
+import { getCategoryName } from '../../data/categories';
+import type { Product } from '../../products/products.types';
+import { formatPrice } from '../../utils/format';
+import { Icon } from '../ui/Icon';
+import { ProductImage } from './ProductImage';
 
 interface ProductCardProps {
-  product: Product
-  isFavorite: boolean
-  onAddToCart: (product: Product) => void
-  onToggleFavorite: (productId: string) => void
+  product: Product;
+  isFavorite: boolean;
+  onAddToCart: (product: Product) => void;
+  onToggleFavorite: (productId: string) => void;
 }
 
 export function ProductCard({
@@ -27,18 +27,14 @@ export function ProductCard({
           width={600}
           height={450}
         />
-        {!product.inStock && <span className="product-card__stock">Out of stock</span>}
         <span className="product-card__actions">
           <button
             type="button"
             className="product-icon-button"
-            aria-label={
-              product.inStock ? `Add ${product.name} to cart` : `${product.name} is out of stock`
-            }
-            disabled={!product.inStock}
+            aria-label={`Add ${product.name} to cart`}
             onClick={() => onAddToCart(product)}
           >
-            <BagIcon />
+            <Icon name="bag" />
           </button>
           <button
             type="button"
@@ -47,7 +43,7 @@ export function ProductCard({
             aria-pressed={isFavorite}
             onClick={() => onToggleFavorite(product.id)}
           >
-            <HeartIcon />
+            <Icon name="heart" />
           </button>
         </span>
       </div>
@@ -57,5 +53,5 @@ export function ProductCard({
         <p className="product-card__price">{formatPrice(product.price)}</p>
       </div>
     </article>
-  )
+  );
 }

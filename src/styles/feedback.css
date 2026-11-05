@@ -38,7 +38,7 @@
 }
 
 /* ========== Catalog states ========== */
-.status-notice {
+.status-message {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -52,7 +52,7 @@
   font-size: var(--text-sm);
 }
 
-.status-notice--error {
+.status-message--error {
   border-inline-start-color: var(--color-sale);
 }
 

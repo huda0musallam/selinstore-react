@@ -1,20 +1,22 @@
-import { useEffect, useRef, useState, type FormEvent } from 'react'
-import { useToast } from '../../context/toastContext'
+import { useEffect, useRef, useState, type FormEvent } from 'react';
 
-export function ContactForm() {
-  const [isSubmitted, setIsSubmitted] = useState(false)
-  const successRef = useRef<HTMLDivElement>(null)
-  const showToast = useToast()
+interface ContactFormProps {
+  onSubmitted: () => void;
+}
+
+export function ContactForm({ onSubmitted }: ContactFormProps) {
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const successRef = useRef<HTMLDivElement>(null);
 
   // The form's button disappears on submit, so bring the confirmation into view and focus.
   useEffect(() => {
-    if (isSubmitted) successRef.current?.focus()
-  }, [isSubmitted])
+    if (isSubmitted) successRef.current?.focus();
+  }, [isSubmitted]);
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault()
-    setIsSubmitted(true)
-    showToast('Thanks for your message!')
+    event.preventDefault();
+    setIsSubmitted(true);
+    onSubmitted();
   }
 
   if (isSubmitted) {
@@ -30,7 +32,7 @@ export function ContactForm() {
           Write another message
         </button>
       </div>
-    )
+    );
   }
 
   return (
@@ -53,5 +55,5 @@ export function ContactForm() {
       </div>
       <button type="submit">Send Message</button>
     </form>
-  )
+  );
 }

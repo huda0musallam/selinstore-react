@@ -1,12 +1,27 @@
-import { Outlet, useLocation } from 'react-router'
-import { Announcement } from './Announcement'
-import { CategoryNav } from './CategoryNav'
-import { Footer } from './Footer'
-import { Header } from './Header'
-import { ScrollManager } from './ScrollManager'
+import { Outlet, useLocation } from 'react-router';
+import type { CategoryFilter } from '../../types/catalog';
+import { Announcement } from './Announcement';
+import { CategoryNav } from './CategoryNav';
+import { Footer } from './Footer';
+import { Header } from './Header';
+import { ScrollManager } from './ScrollManager';
 
-export function Layout() {
-  const { pathname } = useLocation()
+interface LayoutProps {
+  cartCount: number;
+  favoriteCount: number;
+  searchTerm: string;
+  onSearchChange: (searchTerm: string) => void;
+  onSelectCategory: (category: CategoryFilter) => void;
+}
+
+export function Layout({
+  cartCount,
+  favoriteCount,
+  searchTerm,
+  onSearchChange,
+  onSelectCategory,
+}: LayoutProps) {
+  const { pathname } = useLocation();
 
   return (
     <>
@@ -15,10 +30,18 @@ export function Layout() {
         Skip to main content
       </a>
       <Announcement />
-      <Header />
-      <CategoryNav overlapsHero={pathname === '/'} />
+      <Header
+        cartCount={cartCount}
+        favoriteCount={favoriteCount}
+        searchTerm={searchTerm}
+        onSearchChange={onSearchChange}
+      />
+      <CategoryNav
+        placement={pathname === '/' ? 'over-hero' : 'standalone'}
+        onSelectCategory={onSelectCategory}
+      />
       <Outlet />
-      <Footer />
+      <Footer onSelectCategory={onSelectCategory} />
     </>
-  )
+  );
 }

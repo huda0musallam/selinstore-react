@@ -1,27 +1,30 @@
-import type { ChangeEvent, FormEvent } from 'react'
-import { useLocation, useNavigate } from 'react-router'
-import { useCatalog } from '../../context/catalogContext'
-import { SearchIcon } from '../ui/Icons'
+import type { ChangeEvent, FormEvent } from 'react';
+import { useLocation, useNavigate } from 'react-router';
+import { Icon } from '../ui/Icon';
 
-export function HeaderSearch() {
-  const { searchTerm, setSearchTerm } = useCatalog()
-  const { pathname } = useLocation()
-  const navigate = useNavigate()
+interface HeaderSearchProps {
+  value: string;
+  onChange: (value: string) => void;
+}
+
+export function HeaderSearch({ value, onChange }: HeaderSearchProps) {
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
 
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
-    setSearchTerm(event.target.value)
+    onChange(event.target.value);
     // Results live on the home page; the header stays mounted, so focus is kept.
-    if (pathname !== '/') navigate('/#catalog')
+    if (pathname !== '/') navigate('/#catalog');
   }
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault()
-    navigate('/#catalog')
+    event.preventDefault();
+    navigate('/#catalog');
   }
 
   return (
     <form className="header-search" role="search" onSubmit={handleSubmit}>
-      <SearchIcon className="header-search__icon" />
+      <Icon name="search" className="header-search__icon" />
       <label className="visually-hidden" htmlFor="search-input">
         Search products
       </label>
@@ -32,12 +35,12 @@ export function HeaderSearch() {
         name="search"
         placeholder="Search for baby essentials"
         autoComplete="off"
-        value={searchTerm}
+        value={value}
         onChange={handleChange}
       />
       <span className="header-search__button" aria-hidden="true">
-        <SearchIcon />
+        <Icon name="search" />
       </span>
     </form>
-  )
+  );
 }

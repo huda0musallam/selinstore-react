@@ -1,11 +1,15 @@
-import { Link } from 'react-router'
-import { formatPrice } from '../../utils/format'
+import { Link } from 'react-router';
+import { FREE_SHIPPING_THRESHOLD } from '../../cart/cart';
+import { formatPrice } from '../../utils/format';
 
-const FREE_SHIPPING_THRESHOLD = 50
+interface CartSummaryProps {
+  total: number;
+  amountUntilFreeShipping: number;
+}
 
-export function CartSummary({ total }: { total: number }) {
-  const amountLeft = Math.max(FREE_SHIPPING_THRESHOLD - total, 0)
-  const progress = Math.min(total / FREE_SHIPPING_THRESHOLD, 1) * 100
+export function CartSummary({ total, amountUntilFreeShipping }: CartSummaryProps) {
+  const progress = Math.min(total / FREE_SHIPPING_THRESHOLD, 1) * 100;
+  const hasFreeShipping = amountUntilFreeShipping === 0;
 
   return (
     <aside className="cart-summary" aria-labelledby="summary-heading">
@@ -19,7 +23,7 @@ export function CartSummary({ total }: { total: number }) {
         </div>
         <div className="cart-summary__row">
           <dt>Shipping</dt>
-          <dd>{amountLeft === 0 ? 'Free' : 'Calculated at checkout'}</dd>
+          <dd>{hasFreeShipping ? 'Free' : 'Calculated at checkout'}</dd>
         </div>
         <div className="cart-summary__row cart-summary__row--total">
           <dt>Total</dt>
@@ -28,9 +32,9 @@ export function CartSummary({ total }: { total: number }) {
       </dl>
       <div className="shipping-meter">
         <p className="shipping-meter__text" aria-live="polite">
-          {amountLeft === 0
+          {hasFreeShipping
             ? "You've unlocked free shipping!"
-            : `Add ${formatPrice(amountLeft)} more for free shipping.`}
+            : `Add ${formatPrice(amountUntilFreeShipping)} more for free shipping.`}
         </p>
         <div className="shipping-meter__track" aria-hidden="true">
           <div className="shipping-meter__bar" style={{ width: `${progress}%` }} />
@@ -40,5 +44,5 @@ export function CartSummary({ total }: { total: number }) {
         Continue shopping
       </Link>
     </aside>
-  )
+  );
 }

@@ -1,35 +1,53 @@
-import { useRef } from 'react'
-import { Link } from 'react-router'
-import { CartItemRow } from '../components/cart/CartItemRow'
-import { CartSummary } from '../components/cart/CartSummary'
-import { EmptyState } from '../components/ui/EmptyState'
-import { useCart } from '../context/cartContext'
-import { useDocumentTitle } from '../hooks/useDocumentTitle'
-import type { CartItem } from '../types/cart'
-import { pluralize } from '../utils/format'
+import { useRef } from 'react';
+import { Link } from 'react-router';
+import type { CartItem } from '../cart/cart.types';
+import { CartItemRow } from '../components/cart/CartItemRow';
+import { CartSummary } from '../components/cart/CartSummary';
+import { EmptyState } from '../components/ui/EmptyState';
+import { useDocumentTitle } from '../hooks/useDocumentTitle';
+import { pluralize } from '../utils/pluralize';
 
-export function CartPage() {
-  useDocumentTitle('Your Cart — Selin Baby Store')
+interface CartPageProps {
+  items: CartItem[];
+  count: number;
+  total: number;
+  amountUntilFreeShipping: number;
+  onIncrease: (productId: string) => void;
+  onDecrease: (productId: string) => void;
+  onRemove: (productId: string) => void;
+  onClear: () => void;
+}
 
-  const { items, count, total, increase, decrease, remove, clear } = useCart()
-  const headingRef = useRef<HTMLHeadingElement>(null)
+export function CartPage({
+  items,
+  count,
+  total,
+  amountUntilFreeShipping,
+  onIncrease,
+  onDecrease,
+  onRemove,
+  onClear,
+}: CartPageProps) {
+  useDocumentTitle('Your Cart — Selin Baby Store');
+
+  const headingRef = useRef<HTMLHeadingElement>(null);
 
   // When a row disappears its focused button goes with it, so move focus somewhere sensible.
-  const focusHeading = () => headingRef.current?.focus()
+  const focusHeading = () => headingRef.current?.focus();
 
   function handleDecrease(item: CartItem) {
-    decrease(item.id)
-    if (item.quantity === 1) focusHeading()
+    onDecrease(item.id);
+    if (item.quantity === 1) focusHeading();
   }
 
   function handleRemove(productId: string) {
-    remove(productId)
-    focusHeading()
+    onRemove(productId);
+    focusHeading();
   }
 
   function handleClear() {
-    clear()
-    focusHeading()
+    onClear();
+    focusHeading();
   }
 
   return (
@@ -69,7 +87,7 @@ export function CartPage() {
                   <CartItemRow
                     key={item.id}
                     item={item}
-                    onIncrease={increase}
+                    onIncrease={onIncrease}
                     onDecrease={handleDecrease}
                     onRemove={handleRemove}
                   />
@@ -83,10 +101,10 @@ export function CartPage() {
                 Clear cart
               </button>
             </section>
-            <CartSummary total={total} />
+            <CartSummary total={total} amountUntilFreeShipping={amountUntilFreeShipping} />
           </div>
         )}
       </div>
     </main>
-  )
+  );
 }

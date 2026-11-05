@@ -1,24 +1,14 @@
-import { Link } from 'react-router'
-import { categories } from '../../data/categories'
-import { aboutLinks, helpLinks } from '../../data/content'
-import { CategoryLink } from '../ui/CategoryLink'
+import { categories } from '../../data/categories';
+import { aboutLinks, helpLinks } from '../../data/content';
+import type { CategoryFilter } from '../../types/catalog';
+import { CategoryLink } from '../ui/CategoryLink';
+import { FooterLinks } from './FooterLinks';
 
-function ContactLinks({ title, links }: { title: string; links: string[] }) {
-  return (
-    <nav aria-label={title}>
-      <h2 className="site-footer__heading">{title}</h2>
-      <ul className="site-footer__links">
-        {links.map((link) => (
-          <li key={link}>
-            <Link to="/contact">{link}</Link>
-          </li>
-        ))}
-      </ul>
-    </nav>
-  )
+interface FooterProps {
+  onSelectCategory: (category: CategoryFilter) => void;
 }
 
-export function Footer() {
+export function Footer({ onSelectCategory }: FooterProps) {
   return (
     <footer id="contact" className="site-footer">
       <div className="container site-footer__inner">
@@ -34,18 +24,20 @@ export function Footer() {
           <ul className="site-footer__links">
             {categories.map((category) => (
               <li key={category.id}>
-                <CategoryLink category={category.id}>{category.name}</CategoryLink>
+                <CategoryLink category={category.id} onSelect={onSelectCategory}>
+                  {category.name}
+                </CategoryLink>
               </li>
             ))}
           </ul>
         </nav>
-        <ContactLinks title="Help" links={helpLinks} />
-        <ContactLinks title="About Selin" links={aboutLinks} />
+        <FooterLinks title="Help" links={helpLinks} />
+        <FooterLinks title="About Selin" links={aboutLinks} />
       </div>
       <p className="container site-footer__bottom">
         <span>© 2026 Selin Baby Store</span>
         <span>Demo store — no real orders or payments are processed.</span>
       </p>
     </footer>
-  )
+  );
 }

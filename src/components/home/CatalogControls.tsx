@@ -1,9 +1,19 @@
-import { useCatalog } from '../../context/catalogContext'
-import { categories, isCategoryFilter, isSortOrder, sortOptions } from '../../data/categories'
+import { categories, isCategoryFilter, isSortOrder, sortOptions } from '../../data/categories';
+import type { CategoryFilter, SortOrder } from '../../types/catalog';
 
-export function CatalogControls() {
-  const { category, sortOrder, setCategory, setSortOrder } = useCatalog()
+interface CatalogControlsProps {
+  category: CategoryFilter;
+  sortOrder: SortOrder;
+  onCategoryChange: (category: CategoryFilter) => void;
+  onSortChange: (sortOrder: SortOrder) => void;
+}
 
+export function CatalogControls({
+  category,
+  sortOrder,
+  onCategoryChange,
+  onSortChange,
+}: CatalogControlsProps) {
   return (
     <div className="catalog-controls" role="search" aria-label="Filter products">
       <div className="field">
@@ -16,7 +26,7 @@ export function CatalogControls() {
           name="category"
           value={category}
           onChange={(event) => {
-            if (isCategoryFilter(event.target.value)) setCategory(event.target.value)
+            if (isCategoryFilter(event.target.value)) onCategoryChange(event.target.value);
           }}
         >
           <option value="all">All categories</option>
@@ -37,7 +47,7 @@ export function CatalogControls() {
           name="sort"
           value={sortOrder}
           onChange={(event) => {
-            if (isSortOrder(event.target.value)) setSortOrder(event.target.value)
+            if (isSortOrder(event.target.value)) onSortChange(event.target.value);
           }}
         >
           {sortOptions.map((option) => (
@@ -48,5 +58,5 @@ export function CatalogControls() {
         </select>
       </div>
     </div>
-  )
+  );
 }

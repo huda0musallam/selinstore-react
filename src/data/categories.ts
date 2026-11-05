@@ -1,6 +1,7 @@
-import type { Category, CategoryFilter, CategoryId, SortOrder } from '../types/product'
+import type { Category } from '../products/products.types';
+import type { CategoryFilter, CategoryInfo, SortOrder } from '../types/catalog';
 
-export const categories: Category[] = [
+export const categories: CategoryInfo[] = [
   {
     id: 'clothing',
     name: 'Baby Clothing',
@@ -57,22 +58,26 @@ export const categories: Category[] = [
     image: '/images/selin-reference-accessories.png',
     imageAlt: 'Baby accessories in soft pastel colors',
   },
-]
+];
 
 export const sortOptions: { value: SortOrder; label: string }[] = [
   { value: 'default', label: 'Default' },
   { value: 'price-asc', label: 'Price: Low to High' },
   { value: 'price-desc', label: 'Price: High to Low' },
-]
+];
 
-export function getCategoryName(categoryId: CategoryId): string {
-  return categories.find((category) => category.id === categoryId)?.name ?? categoryId
+export function getCategoryName(categoryId: Category): string {
+  return categories.find((category) => category.id === categoryId)?.name ?? categoryId;
+}
+
+export function isCategory(value: unknown): value is Category {
+  return categories.some((category) => category.id === value);
 }
 
 export function isCategoryFilter(value: string): value is CategoryFilter {
-  return value === 'all' || categories.some((category) => category.id === value)
+  return value === 'all' || isCategory(value);
 }
 
 export function isSortOrder(value: string): value is SortOrder {
-  return sortOptions.some((option) => option.value === value)
+  return sortOptions.some((option) => option.value === value);
 }

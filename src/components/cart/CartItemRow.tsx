@@ -1,13 +1,13 @@
-import { getCategoryName } from '../../data/categories'
-import type { CartItem } from '../../types/cart'
-import { formatPrice } from '../../utils/format'
-import { ProductImage } from '../products/ProductImage'
+import type { CartItem } from '../../cart/cart.types';
+import { getCategoryName } from '../../data/categories';
+import { formatPrice } from '../../utils/format';
+import { ProductImage } from '../products/ProductImage';
 
 interface CartItemRowProps {
-  item: CartItem
-  onIncrease: (productId: string) => void
-  onDecrease: (item: CartItem) => void
-  onRemove: (productId: string) => void
+  item: CartItem;
+  onIncrease: (productId: string) => void;
+  onDecrease: (item: CartItem) => void;
+  onRemove: (productId: string) => void;
 }
 
 export function CartItemRow({ item, onIncrease, onDecrease, onRemove }: CartItemRowProps) {
@@ -56,5 +56,5 @@ export function CartItemRow({ item, onIncrease, onDecrease, onRemove }: CartItem
         </button>
       </div>
     </li>
-  )
+  );
 }

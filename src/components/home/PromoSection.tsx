@@ -1,6 +1,11 @@
-import { CategoryLink } from '../ui/CategoryLink'
+import type { CategoryFilter } from '../../types/catalog';
+import { CategoryLink } from '../ui/CategoryLink';
 
-export function PromoSection() {
+interface PromoSectionProps {
+  onSelectCategory: (category: CategoryFilter) => void;
+}
+
+export function PromoSection({ onSelectCategory }: PromoSectionProps) {
   return (
     <section className="promo-section">
       <div className="container promo">
@@ -15,7 +20,11 @@ export function PromoSection() {
             Up to 20% off sleep sacks, crib sheets, and night lights — everything for calmer
             evenings and cozier nights.
           </p>
-          <CategoryLink category="sleep" className="button button--primary">
+          <CategoryLink
+            category="sleep"
+            onSelect={onSelectCategory}
+            className="button button--primary"
+          >
             Shop the collection
           </CategoryLink>
         </div>
@@ -26,5 +35,5 @@ export function PromoSection() {
         />
       </div>
     </section>
-  )
+  );
 }
