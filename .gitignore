@@ -12,10 +12,14 @@ dist
 dist-ssr
 *.local
 
-# Environment files (the example holds no secrets)
+# Environment files
 .env
 .env.*
-!.env.example
+
+# Extra skill copies the skills installer makes for other AI tools.
+# This project keeps its skills in .claude/skills.
+.agents/
+.aider-desk/
 
 # Temporary files
 *.tmp
