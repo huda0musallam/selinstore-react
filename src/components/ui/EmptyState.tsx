@@ -1,9 +1,9 @@
-import type { ReactNode } from 'react'
+import type { ReactNode } from 'react';
 
 interface EmptyStateProps {
-  title: string
-  children: ReactNode
-  action: ReactNode
+  title: string;
+  children: ReactNode;
+  action: ReactNode;
 }
 
 export function EmptyState({ title, children, action }: EmptyStateProps) {
@@ -13,5 +13,5 @@ export function EmptyState({ title, children, action }: EmptyStateProps) {
       <p>{children}</p>
       {action}
     </section>
-  )
+  );
 }

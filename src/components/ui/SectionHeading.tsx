@@ -1,8 +1,8 @@
 interface SectionHeadingProps {
-  id?: string
-  title: string
-  lead: string
-  className?: string
+  id?: string;
+  title: string;
+  lead: string;
+  className?: string;
 }
 
 export function SectionHeading({ id, title, lead, className = '' }: SectionHeadingProps) {
@@ -13,5 +13,5 @@ export function SectionHeading({ id, title, lead, className = '' }: SectionHeadi
       </h2>
       <p className="section-heading__lead">{lead}</p>
     </div>
-  )
+  );
 }

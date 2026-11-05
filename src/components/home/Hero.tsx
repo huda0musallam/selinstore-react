@@ -1,9 +1,9 @@
-import { Link } from 'react-router'
-import { heroSlides } from '../../data/content'
-import { useCarousel } from '../../hooks/useCarousel'
+import { Link } from 'react-router';
+import { heroSlides } from '../../data/content';
+import { useCarousel } from '../../hooks/useCarousel';
 
 export function Hero() {
-  const { activeIndex, isPaused, showSlide, togglePaused } = useCarousel(heroSlides.length)
+  const { activeIndex, isPaused, showSlide, togglePaused } = useCarousel(heroSlides.length);
 
   return (
     <section className="intro" aria-labelledby="intro-heading" aria-roledescription="carousel">
@@ -73,5 +73,5 @@ export function Hero() {
         🌈
       </span>
     </section>
-  )
+  );
 }

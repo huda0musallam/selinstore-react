@@ -1,4 +1,4 @@
-import { benefits } from '../../data/content'
+import { benefits } from '../../data/content';
 
 export function Benefits() {
   return (
@@ -13,5 +13,5 @@ export function Benefits() {
         </div>
       ))}
     </section>
-  )
+  );
 }

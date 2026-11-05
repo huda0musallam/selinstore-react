@@ -5,5 +5,5 @@ export function ProductCardSkeleton() {
       <div className="skeleton skeleton--line" />
       <div className="skeleton skeleton--line skeleton--short" />
     </div>
-  )
+  );
 }

@@ -1,9 +1,9 @@
-import { Link } from 'react-router'
-import { EmptyState } from '../components/ui/EmptyState'
-import { useDocumentTitle } from '../hooks/useDocumentTitle'
+import { Link } from 'react-router';
+import { EmptyState } from '../components/ui/EmptyState';
+import { useDocumentTitle } from '../hooks/useDocumentTitle';
 
 export function NotFoundPage() {
-  useDocumentTitle('Page not found | Selin Baby Store')
+  useDocumentTitle('Page not found | Selin Baby Store');
 
   return (
     <main id="main-content" className="cart-page">
@@ -20,5 +20,5 @@ export function NotFoundPage() {
         </EmptyState>
       </div>
     </main>
-  )
+  );
 }

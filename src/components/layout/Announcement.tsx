@@ -10,5 +10,5 @@ export function Announcement() {
         <span>Track Order</span>
       </span>
     </div>
-  )
+  );
 }
