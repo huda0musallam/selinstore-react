@@ -1,0 +1,68 @@
+.contact-section {
+  max-width: 650px;
+  margin: 60px auto;
+  padding: 30px 20px;
+}
+
+.contact-section h1 {
+  color: var(--color-pink);
+  text-align: center;
+}
+
+.contact-section > p {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.contact-form {
+  display: grid;
+  gap: 20px;
+}
+
+.form-group {
+  display: grid;
+  gap: 8px;
+}
+
+.form-group label {
+  font-weight: 600;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  font: inherit;
+}
+
+.contact-form button {
+  padding: 14px;
+  border: none;
+  border-radius: 25px;
+  background: var(--color-pink);
+  color: var(--color-white);
+}
+
+.contact-form button:hover {
+  opacity: 0.9;
+}
+
+.contact-form input:focus-visible,
+.contact-form textarea:focus-visible,
+.contact-form button:focus-visible {
+  outline: 3px solid var(--color-lavender);
+  outline-offset: 3px;
+}
+
+.contact-success {
+  display: grid;
+  justify-items: center;
+  gap: var(--space-4);
+  padding: var(--space-10) var(--space-6);
+  border: 1px solid var(--color-sage);
+  border-radius: var(--radius-xl);
+  background: var(--color-cream);
+  text-align: center;
+}

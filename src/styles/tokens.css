@@ -1,0 +1,81 @@
+:root {
+  /* Selin brand palette */
+  --color-pink: #f28ca3;
+  --color-peach: #ffc692;
+  --color-sage: #afc9a8;
+  --color-lavender: #b8a1e0;
+  --color-cream: #fff7f1;
+
+  /* Supporting colors */
+  --color-white: #ffffff;
+  --color-text: #302a29;
+  --color-text-secondary: #77706c;
+  --color-border: #e9e2dc;
+  --color-sale: #b84f4f;
+  --color-success: #4f7d5b;
+
+  /* Deep rose: primary buttons, so white text stays readable */
+  --color-rose: #985d67;
+  --color-rose-dark: #713f4a;
+  --color-pink-soft: #fde8ed;
+  --color-beige: #f5ece2;
+  --color-photo-fallback: #f4eee5;
+
+  /* Fonts */
+  --font-heading: 'Nunito', ui-rounded, 'Segoe UI', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+
+  /* Font sizes */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: clamp(1.75rem, 1.5rem + 1vw, 2.25rem);
+  --text-4xl: clamp(2rem, 1.6rem + 1.8vw, 3rem);
+
+  /* Spacing (multiples of 4px) */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+
+  /* Layout */
+  --container-max: 1280px;
+  --container-padding: clamp(var(--space-4), 4vw, var(--space-8));
+  --section-spacing: clamp(var(--space-10), 7vw, var(--space-16));
+  --touch-target: 44px;
+  --small-control: 36px;
+  --logo-width: 112px;
+  --summary-width: 380px;
+  --cart-image-size: 88px;
+  --cart-image-size-large: 120px;
+  --category-nav-height: 54px;
+
+  /* Shapes */
+  --radius-md: 8px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-pill: 999px;
+
+  /* Shadows */
+  --shadow-sm: 0 2px 8px rgb(48 42 41 / 5%);
+  --shadow-md: 0 8px 22px rgb(48 42 41 / 10%);
+
+  /* Motion */
+  --duration-fast: 150ms;
+  --duration-normal: 250ms;
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --image-zoom: 1.04;
+
+  /* Focus ring */
+  --focus-ring: 3px solid var(--color-rose);
+  --focus-offset: 2px;
+}
